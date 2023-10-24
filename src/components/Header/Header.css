@@ -1,0 +1,48 @@
+.header {
+    height: 60px;
+}
+
+.header-cart {
+    position: absolute;
+    right: 0;
+}
+
+.cart {
+    position: relative;
+    display: block;
+    background-color: #000;
+    background-size: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.cart.open {
+    right: 450px;
+    background-image: url(../../../public/img/icon-x.png);
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: center;
+    z-index: 1;
+}
+
+.cart.closed {
+    vertical-align: middle;
+    background-image: url(../../../public/img/cart.png);
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.cart-quantity {
+    width: 18px;
+    height: 18px;
+    background: #eabf00;
+    color: #0c0b10;
+    font-weight: bold;
+    line-height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
