@@ -1,0 +1,16 @@
+.sorting-products-by-size {
+    max-width: 200px;
+}
+
+.sorting-products-by-size-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+}
+
+.sorting-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+

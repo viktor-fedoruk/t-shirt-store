@@ -4,7 +4,7 @@ const HeaderCartProduct = () => {
         <ul className="header-cart-product">
             <li className="header-cart-product-item">
                 <div className="header-cart-product-img">
-                    <img src={}/>
+                    <img />
                 </div>
                 <div className="header-cart-product-info">
                     <p className="header-cart-product-name"></p>
