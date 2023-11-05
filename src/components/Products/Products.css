@@ -4,11 +4,21 @@
 }
 
 .products-list-wrapper {
-    flex-grow: 1;
-    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
 }
 
 .products-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
+
+@media (max-width: 600px) {
+    .products-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+

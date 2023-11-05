@@ -1,5 +1,5 @@
 .sorting-products-by-size {
-    max-width: 200px;
+    max-width: 15%;
 }
 
 .sorting-products-by-size-title {
@@ -14,3 +14,10 @@
     cursor: pointer;
 }
 
+@media (max-width: 600px) {
+    .sorting-products-by-size {
+        display: block;
+        max-width: 100%;
+        text-align: center;
+    }
+}

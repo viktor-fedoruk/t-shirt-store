@@ -1,62 +1,79 @@
-import React, { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 import iProduct from "../../../../types/types.ts";
 import "./HeaderCartItem.css"
 
 interface HeaderCartItemProps {
     product: iProduct,
+    cartProducts: iProduct[],
+    setCartProducts: (products: iProduct[]) => void,
 }
 
 const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
     const {
         product,
+        cartProducts,
+        setCartProducts,
     } = props;
 
-const handleOnMouseOver: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    const targetElement = e.target as HTMLElement;
+    const deleteProductCartItem: MouseEventHandler<HTMLButtonElement> = (e) => {
+        const productItemUl = (e.target as HTMLElement).closest(".cart-item-wrapper");
 
-    if (targetElement) {
-        const listItem = targetElement.closest("li");
+        if (productItemUl) {
+            productItemUl.classList.add("active");
+        }
+    }
 
-        if (listItem) {
-            const productId = listItem.id;
-            const getProductById = document.getElementById(productId);
+    const handleOnMouseOver: MouseEventHandler<HTMLDivElement> = (e) => {
+        const targetElement = e.target as HTMLElement;
 
-            if (getProductById === null) {
-                return;
-            } else {
-                getProductById.classList.add("line-through");
+        if (targetElement) {
+            const listItem = targetElement.closest("li");
+
+            if (listItem) {
+                const productId = listItem.id;
+                const getProductById = document.getElementById(productId);
+
+                if (getProductById === null) {
+                    return;
+                } else {
+                    getProductById.classList.add("line-through");
+                }
             }
         }
     }
-}
 
-const handleOnMouseOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    const targetElement = e.target as HTMLElement;
+    const handleOnMouseOut: MouseEventHandler<HTMLDivElement> = (e) => {
+        const targetElement = e.target as HTMLElement;
 
-    if (targetElement) {
-        const listItem = targetElement.closest("li");
+        if (targetElement) {
+            const listItem = targetElement.closest("li");
 
-        if (listItem) {
-            const productId = listItem.id;
-            const getProductById = document.getElementById(productId);
+            if (listItem) {
+                const productId = listItem.id;
+                const getProductById = document.getElementById(productId);
 
-            if (getProductById === null) {
-                return;
-            } else {
-                getProductById.classList.remove("line-through");
+                if (getProductById === null) {
+                    return;
+                } else {
+                    getProductById.classList.remove("line-through");
+                }
             }
         }
     }
-}
 
     return (
         <li
-            id={product.id.toString()}
             className="cart-item-wrapper"
+            id={product.id.toString()}
+            onAnimationEnd={() => {
+                setCartProducts(cartProducts.filter(item =>
+                    item.id !== product.id
+                ))
+            }}
         >
             <div className="cart-item-row">
                 <div className="cart-item-image">
-                    <img src={product.image} alt="Product Image"/>
+                    <img src={product.image} alt="Product Image" />
                 </div>
                 <div className="cart-item-info">
                     <p className="cart-item-title">{product.title}</p>
@@ -68,10 +85,13 @@ const handleOnMouseOut: React.MouseEventHandler<HTMLDivElement> = (e) => {
                 <p className="cart-item-price">{`$ ${product.price.toFixed(2)}`}</p>
             </div>
             <div className="cart-item-remove-wrapper"
-                    onMouseOver={handleOnMouseOver}
-                    onMouseOut={handleOnMouseOut}
+                 onMouseOver={handleOnMouseOver}
+                 onMouseOut={handleOnMouseOut}
             >
-                <button className="remove-item">
+                <button
+                    className="remove-item"
+                    onClick={deleteProductCartItem}
+                >
                     ×
                 </button>
             </div>

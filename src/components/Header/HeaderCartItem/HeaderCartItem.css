@@ -6,6 +6,11 @@
     border-top: 1px solid #000000;
 }
 
+.cart-item-wrapper.active {
+    animation: outAnimation 0.160s ease-out;
+    transition-duration: 0.1s;
+}
+
 .cart-item-wrapper:last-child {
     border-bottom: 1px solid #000000;
 }
@@ -80,4 +85,14 @@
 .line-through:hover {
     background: #100404;
     opacity: 80%;
+}
+
+@keyframes outAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

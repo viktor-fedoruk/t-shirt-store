@@ -19,7 +19,7 @@ const SelectedProducts:FC<SelectedProducts> = (props) => {
 
     return (
         <div className="products-sorting-row">
-            <div className="products-found">{`${productsFound} ${"Product(s) found."}`}</div>
+            <div className="products-found">{`${productsFound} Product(s) found.`}</div>
             <div className="sorting-products-by-price">Order by
                 <select
                     className="select-column"

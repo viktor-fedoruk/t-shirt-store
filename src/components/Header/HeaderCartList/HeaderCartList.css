@@ -10,7 +10,6 @@
 }
 
 .cart-list {
-    position: relative;
     overflow: scroll;
     width: 100%;
     padding: 0 0 200px 0;
@@ -35,7 +34,7 @@
 }
 
 .cart-icon {
-    background-image: url(../../../../public/img/cart.png);
+    background-image: url(../../../../public/img/products/cart.png);
     background-repeat: no-repeat;
     background-position: 50%;
     width: 40px;
@@ -86,25 +85,13 @@
     align-items: center;
 }
 
-.header-cart-subtotal-title {
-
-}
-
 .subtotal {
     font-size: 16px;
-}
-
-.header-cart-subtotal-price {
-
 }
 
 .subtotal-price {
     color: #eabf00;
     font-size: 22px;
-}
-
-.subtotal-counter {
-
 }
 
 .header-cart-checkout-wrapper {
@@ -121,3 +108,8 @@
     font-size: 16px;
 }
 
+@media (max-width: 600px) {
+    .cart-list-container {
+        width: 100%;
+    }
+}

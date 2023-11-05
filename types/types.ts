@@ -11,5 +11,5 @@ export default interface iProduct {
     currencyFormat: string,
     isFreeShipping: boolean,
     quantity?: number,
-}
+};
 

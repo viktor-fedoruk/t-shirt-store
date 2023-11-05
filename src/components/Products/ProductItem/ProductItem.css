@@ -1,9 +1,11 @@
 .product-item-wrapper {
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     align-items: center;
-    width: 240px;
+    width: 25%;
     padding: 10px;
+    flex: 1 2 240px;
 }
 
 .product-item-image {
@@ -81,4 +83,10 @@
 .add-to-cart:hover {
     transition-duration: 0.4s;
     background: #cece11;
+}
+
+@media (max-width: 768px) {
+    .product-item-wrapper {
+        flex: 0 2 220px;
+    }
 }

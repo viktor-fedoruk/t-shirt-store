@@ -25,7 +25,7 @@ const Button:FC<ButtonProps> = (props) => {
 
             setTimeout(() => {
                 setButtonText(text);
-            }, 1000)
+            }, 1000);
         }
     }
 

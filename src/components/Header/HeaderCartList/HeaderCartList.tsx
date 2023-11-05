@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Modal from "../../Modal/Modal.tsx";
 import Button from "../../Button/Button.tsx";
 import HeaderCartItem from "../HeaderCartItem/HeaderCartItem.tsx";
 import iProduct from "../../../../types/types.ts";
@@ -6,13 +7,19 @@ import "./HeaderCartList.css";
 
 interface HeaderCartList {
     cartProducts: iProduct[],
+    setCartProducts: (products: iProduct[]) => void,
+    onCloseHeaderCartModal: () => void,
     productsQuantityInCart?: number,
+    isHeaderCartOpen: boolean,
 }
 
 const HeaderCartList:FC<HeaderCartList> = (props) => {
     const {
         cartProducts,
+        setCartProducts,
+        onCloseHeaderCartModal,
         productsQuantityInCart,
+        isHeaderCartOpen,
     } = props;
 
     const sumProductsPrices = cartProducts
@@ -21,40 +28,49 @@ const HeaderCartList:FC<HeaderCartList> = (props) => {
         .toFixed(2);
 
     return (
-        <div className="cart-list-container">
-            <div className="cart-list">
-                <div className="header-cart-icon-wrapper">
+        <>
+            {isHeaderCartOpen && (
+                <Modal
+                    onClose={onCloseHeaderCartModal}
+                    classNameWrapper="cart-list-container"
+                    classNameContent="cart-list"
+                    portalClassName="header-cart"
+                >
+                    <div className="header-cart-icon-wrapper">
                     <span className="cart-icon">
                         <span className="cart-products-quantity">{productsQuantityInCart}</span>
                     </span>
-                    <p className="cart-title">Cart</p>
-                </div>
-                <ul className="cart-item-container">
-                    {cartProducts.map(product => (
-                        <HeaderCartItem
-                            key={product.id}
-                            product={product}
+                        <p className="cart-title">Cart</p>
+                    </div>
+                    <ul className="cart-item-container">
+                        {cartProducts.map(product => (
+                            <HeaderCartItem
+                                key={product.id}
+                                product={product}
+                                cartProducts={cartProducts}
+                                setCartProducts={setCartProducts}
+                            />
+                        ))}
+                    </ul>
+                    <div className="header-cart-checkout">
+                        <div className="header-cart-subtotal">
+                            <div className="header-cart-subtotal-title">
+                                <p className="subtotal">Subtotal</p>
+                            </div>
+                            <div className="header-cart-subtotal-price">
+                                <p className="subtotal-price">{`$ ${sumProductsPrices}`}</p>
+                            </div>
+                        </div>
+
+                        <Button
+                            classNameContainer="header-cart-checkout-wrapper"
+                            classNameContent="checkout-button"
+                            text="CHECKOUT"
                         />
-                    ))}
-                </ul>
-            </div>
-            <div className="header-cart-checkout">
-                <div className="header-cart-subtotal">
-                    <div className="header-cart-subtotal-title">
-                        <p className="subtotal">Subtotal</p>
                     </div>
-                    <div className="header-cart-subtotal-price">
-                        <p className="subtotal-price">{`$ ${sumProductsPrices}`}</p>
-                        <p className="subtotal-counter">{}</p>
-                    </div>
-                </div>
-                <Button
-                    classNameContainer="header-cart-checkout-wrapper"
-                    classNameContent="checkout-button"
-                    text="CHECKOUT"
-                />
-            </div>
-        </div>
+                </Modal>
+            )}
+        </>
     )};
 
 export default HeaderCartList;

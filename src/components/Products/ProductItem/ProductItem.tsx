@@ -9,6 +9,7 @@ interface ProductItemProps {
     cartProducts: iProduct[],
     setCartProducts: (products: iProduct[]) => void,
 }
+
 const ProductItem:FC<ProductItemProps> = (props) => {
     const {
         product,
@@ -57,7 +58,7 @@ const ProductItem:FC<ProductItemProps> = (props) => {
     return (
         <li className="product-item-wrapper">
             <div className="product-item-image">
-                <img src={product.image} alt="Product Image"/>
+                <img src={product.image} alt="Product Image" />
                     {product.isFreeShipping && (
                         <p className="free-shipping">Free shipping</p>
                     )}
@@ -68,6 +69,7 @@ const ProductItem:FC<ProductItemProps> = (props) => {
                     {`or ${product.installments}`} x
                     <b>{`$${(Math.round((product.price / product.installments) * 100) / 100).toFixed(2)}`}</b>
                 </p>
+
             <Button
                 handleOnClick={addProductToCart}
                 classNameContainer="product-item-add-to-cart-wrapper"

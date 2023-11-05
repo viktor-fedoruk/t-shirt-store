@@ -26,7 +26,6 @@ const ProductSizeFilterItem:FC<ProductSizeFilterItem> = (props) => {
                 <span className="size">{productSize}</span>
             </label>
         </div>
-    )
-}
+    )};
 
 export default ProductSizeFilterItem;

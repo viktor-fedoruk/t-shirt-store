@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header.tsx";
 import Products from "../Products/Products.tsx";
 import iProduct from "../../../types/types.ts";
-import "../../../public/img/cart.png"
+import "../../../public/img/products/cart.png"
 import "./App.css"
 
 function App() {
@@ -13,21 +13,27 @@ function App() {
     const [productsSizes, setProductsSizes] = useState<string[]>([]);
     const [selectedProducts, setSelectedProducts] = useState<iProduct[]>([]);
 
-    const fetchProducts = () => {
         useEffect(() => {
             const getUrl = async () => {
-                const response = await fetch("http://localhost:3001/products");
-                const result = await response.json();
+                try {
+                    const response = await fetch("http://localhost:3001/products");
 
-                setProducts(result);
-                setOriginalProducts(result);
+                    if (!response.ok) {
+                        const message = `An error has occured: ${response.status}`;
+                        throw new Error(message);
+                    }
+
+                    const result = await response.json();
+
+                    setProducts(result);
+                    setOriginalProducts(result);
+                } catch (error) {
+                    console.log(error);
+                }
             }
 
             getUrl();
         },[]);
-    }
-
-    fetchProducts();
 
     const handleChangeSelectProducts = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const getValueFromDropdownList = e.target.value;
@@ -70,7 +76,10 @@ function App() {
             
             setProductsSizes(selectedSizes);
 
-            const filteredProducts = originalProducts.filter((product) => selectedSizes.some(size => product.availableSizes.includes(size)));
+            const filteredProducts = originalProducts
+                .filter((product) => selectedSizes
+                    .some(size => product.availableSizes
+                        .includes(size)));
 
             setProducts(filteredProducts);
             setSelectedProducts(filteredProducts);
@@ -79,7 +88,10 @@ function App() {
 
             setProductsSizes(selectedSizes);
 
-            const filteredProducts = originalProducts.filter((product) => selectedSizes.some(size => product.availableSizes.includes(size)));
+            const filteredProducts = originalProducts
+                .filter((product) => selectedSizes
+                    .some(size => product.availableSizes
+                        .includes(size)));
 
             if (!filteredProducts.length) {
                 setProducts(originalProducts);
@@ -96,20 +108,19 @@ function App() {
     <>
         <Header
             cartProducts={cartProducts}
+            setCartProducts={setCartProducts}
         />
         <Products
             products={products}
             cartProducts={cartProducts}
-            productsSizes={productsSizes}
             setCartProducts={setCartProducts}
+            productsSizes={productsSizes}
             originalProducts={originalProducts}
             dropdownListValue={dropdownListValue}
             onHandleChangeSelectProducts={handleChangeSelectProducts}
             onHandleFilteredProductsBySize={handleFilteredProductsBySize}
-
         />
     </>
-  )
-}
+    )}
 
 export default App
