@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 interface iModalProps {
     onClose: () => void;
     children: ReactNode,
-    portalClassName?: string,
+    portalClassName: string,
     classNameWrapper?: string,
     classNameContent?: string,
 }
@@ -37,16 +37,17 @@ const Modal: FC<iModalProps> = (props) => {
 
     return createPortal(
         <div
-            className={`${classNameWrapper}`}
+            className={`${classNameWrapper || "portal-wrapper"}`}
         >
             <div
                 ref={modalRef}
-                className={`${classNameContent}`}
+                className={`${classNameContent || "portal-wrapper-content"}`}
             >
                 {children}
             </div>
         </div>,
         document.querySelector(`.${portalClassName}`)!
-    )};
+    )
+};
 
 export default Modal;

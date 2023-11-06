@@ -23,8 +23,7 @@ const HeaderCartList:FC<HeaderCartList> = (props) => {
     } = props;
 
     const sumProductsPrices = cartProducts
-        .map(product => (product.price * (product.quantity || 0) ))
-        .reduce( (sum, current) => sum + current, 0)
+        .reduce( (sum, current) => sum + (current.price * (current.quantity || 0)), 0)
         .toFixed(2);
 
     return (
@@ -37,11 +36,12 @@ const HeaderCartList:FC<HeaderCartList> = (props) => {
                     portalClassName="header-cart"
                 >
                     <div className="header-cart-icon-wrapper">
-                    <span className="cart-icon">
-                        <span className="cart-products-quantity">{productsQuantityInCart}</span>
-                    </span>
+                        <span className="cart-icon">
+                            <span className="cart-products-quantity">{productsQuantityInCart}</span>
+                        </span>
                         <p className="cart-title">Cart</p>
                     </div>
+
                     <ul className="cart-item-container">
                         {cartProducts.map(product => (
                             <HeaderCartItem
@@ -71,6 +71,7 @@ const HeaderCartList:FC<HeaderCartList> = (props) => {
                 </Modal>
             )}
         </>
-    )};
+    )
+};
 
 export default HeaderCartList;

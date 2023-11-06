@@ -22,53 +22,49 @@ const ProductItem:FC<ProductItemProps> = (props) => {
         const productInCart = cartProducts.find(productItem => productItem.id === product.id);
 
         if (!productInCart) {
-            setCartProducts([...cartProducts,
-                {...product,
-                    availableSizes: productsSizes[0] || product.availableSizes[0],
-                    quantity: 1,
-                }
-            ]);
+            const newAddedProduct = {
+                ...product,
+                availableSizes: productsSizes[0] || product.availableSizes[0],
+                quantity: 1,
+            };
+
+            setCartProducts([...cartProducts, newAddedProduct]);
         } else {
+            const updatedCartProducts = [...cartProducts];
             const findProductByIndex = cartProducts.findIndex(productItem => productItem.id === product.id);
+            const productInCart = cartProducts[findProductByIndex];
 
             if (productInCart.quantity) {
-                cartProducts[findProductByIndex] = {
-                    ...cartProducts[findProductByIndex],
-                    quantity: productInCart.quantity + 1,
-                }
+                productInCart.quantity++;
 
                 setCartProducts([
                     ...cartProducts
                 ]);
             }
 
-            if (cartProducts[findProductByIndex].quantity === cartProducts[findProductByIndex].installments) {
-                    cartProducts[findProductByIndex] = {
-                    ...cartProducts[findProductByIndex],
-                        price: (cartProducts[findProductByIndex].price / cartProducts[findProductByIndex].installments * 100) / 100,
-                    }
+            if (productInCart.quantity === productInCart.installments) {
+                productInCart.price = Math.round(cartProducts[findProductByIndex].price / cartProducts[findProductByIndex].installments * 100) / 100;
+            }
 
-                setCartProducts([
-                    ...cartProducts
-                ]);
+            setCartProducts(updatedCartProducts);
             }
         }
-    }
 
     return (
         <li className="product-item-wrapper">
             <div className="product-item-image">
                 <img src={product.image} alt="Product Image" />
-                    {product.isFreeShipping && (
-                        <p className="free-shipping">Free shipping</p>
-                    )}
+
+                {product.isFreeShipping && (
+                    <p className="free-shipping">Free shipping</p>
+                )}
             </div>
-                <p className="product-item-name">{product.title}</p>
-                <p className="product-item-price">$ {product.price.toFixed(2)}</p>
-                <p className="product-item-installments">
-                    {`or ${product.installments}`} x
-                    <b>{`$${(Math.round((product.price / product.installments) * 100) / 100).toFixed(2)}`}</b>
-                </p>
+
+            <p className="product-item-name">{product.title}</p>
+            <p className="product-item-price">$ {product.price.toFixed(2)}</p>
+            <p className="product-item-installments">{`or ${product.installments}`} x
+                <b>{`$${(Math.round((product.price / product.installments) * 100) / 100).toFixed(2)}`}</b>
+            </p>
 
             <Button
                 handleOnClick={addProductToCart}
@@ -78,6 +74,7 @@ const ProductItem:FC<ProductItemProps> = (props) => {
                 buttonActiveText="Added"
             />
         </li>
-    )};
+    )
+};
 
 export default ProductItem;

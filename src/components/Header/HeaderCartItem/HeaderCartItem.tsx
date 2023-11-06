@@ -23,7 +23,7 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
         }
     }
 
-    const handleOnMouseOver: MouseEventHandler<HTMLDivElement> = (e) => {
+    const handleMouseEvents = (e: React.MouseEvent<HTMLDivElement>, mouseOnElement: boolean) => {
         const targetElement = e.target as HTMLElement;
 
         if (targetElement) {
@@ -33,29 +33,13 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
                 const productId = listItem.id;
                 const getProductById = document.getElementById(productId);
 
-                if (getProductById === null) {
-                    return;
-                } else {
-                    getProductById.classList.add("line-through");
-                }
-            }
-        }
-    }
 
-    const handleOnMouseOut: MouseEventHandler<HTMLDivElement> = (e) => {
-        const targetElement = e.target as HTMLElement;
-
-        if (targetElement) {
-            const listItem = targetElement.closest("li");
-
-            if (listItem) {
-                const productId = listItem.id;
-                const getProductById = document.getElementById(productId);
-
-                if (getProductById === null) {
-                    return;
-                } else {
-                    getProductById.classList.remove("line-through");
+                if (getProductById) {
+                    if (mouseOnElement) {
+                        getProductById.classList.add("line-through");
+                    } else {
+                        getProductById.classList.remove("line-through");
+                    }
                 }
             }
         }
@@ -75,18 +59,22 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
                 <div className="cart-item-image">
                     <img src={product.image} alt="Product Image" />
                 </div>
+
                 <div className="cart-item-info">
                     <p className="cart-item-title">{product.title}</p>
                     <p className="cart-item-description">{`${product.availableSizes} | ${product.style}`}</p>
                     <p className="cart-item-quantity">{`Quantity: ${product.quantity}`}</p>
                 </div>
+
             </div>
+
             <div className="cart-item-price-wrapper">
                 <p className="cart-item-price">{`$ ${product.price.toFixed(2)}`}</p>
             </div>
+
             <div className="cart-item-remove-wrapper"
-                 onMouseOver={handleOnMouseOver}
-                 onMouseOut={handleOnMouseOut}
+                 onMouseOver={(e) => handleMouseEvents(e, true)}
+                 onMouseOut={(e) => handleMouseEvents(e, true)}
             >
                 <button
                     className="remove-item"
@@ -96,6 +84,7 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
                 </button>
             </div>
         </li>
-    )};
+    )
+};
 
 export default HeaderCartItem;

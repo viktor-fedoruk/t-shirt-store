@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header.tsx";
 import Products from "../Products/Products.tsx";
 import iProduct from "../../../types/types.ts";
@@ -13,27 +13,27 @@ function App() {
     const [productsSizes, setProductsSizes] = useState<string[]>([]);
     const [selectedProducts, setSelectedProducts] = useState<iProduct[]>([]);
 
-        useEffect(() => {
-            const getUrl = async () => {
-                try {
-                    const response = await fetch("http://localhost:3001/products");
+    useEffect(() => {
+        const getUrl = async () => {
+            try {
+                const response = await fetch("http://localhost:3001/products");
 
-                    if (!response.ok) {
-                        const message = `An error has occured: ${response.status}`;
-                        throw new Error(message);
-                    }
-
-                    const result = await response.json();
-
-                    setProducts(result);
-                    setOriginalProducts(result);
-                } catch (error) {
-                    console.log(error);
+                if (!response.ok) {
+                    const message = `An error has occured: ${response.status}`;
+                    throw new Error(message);
                 }
-            }
 
-            getUrl();
-        },[]);
+                const result = await response.json();
+
+                setProducts(result);
+                setOriginalProducts(result);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getUrl();
+    },[]);
 
     const handleChangeSelectProducts = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const getValueFromDropdownList = e.target.value;
@@ -110,6 +110,7 @@ function App() {
             cartProducts={cartProducts}
             setCartProducts={setCartProducts}
         />
+
         <Products
             products={products}
             cartProducts={cartProducts}
@@ -121,6 +122,7 @@ function App() {
             onHandleFilteredProductsBySize={handleFilteredProductsBySize}
         />
     </>
-    )}
+    )
+}
 
 export default App

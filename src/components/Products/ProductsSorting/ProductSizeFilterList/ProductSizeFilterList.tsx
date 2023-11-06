@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ProductSizeFilterItem from "./ProductSizeFilterItem/ProductSizeFilterItem.tsx";
 import iProduct from "../../../../../types/types.ts";
 import "./ProductSizeFilterList.css"
@@ -29,6 +29,7 @@ const ProductSizeFilterList:FC<ProductSizeFilterListProps> = (props) => {
                     />
                 ))}
         </div>
-    )};
+    )
+};
 
 export default ProductSizeFilterList;

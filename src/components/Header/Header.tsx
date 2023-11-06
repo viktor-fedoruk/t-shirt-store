@@ -48,6 +48,7 @@ const Header:FC<HeaderProps> = (props) => {
                 isHeaderCartOpen={isHeaderCartOpen}
             />
         </div>
-    )};
+    )
+};
 
 export default Header;

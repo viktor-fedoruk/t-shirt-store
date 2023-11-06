@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import iProduct from "../../../../../types/types.ts";
 import "./SelectedProducts.css"
 
@@ -32,6 +32,7 @@ const SelectedProducts:FC<SelectedProducts> = (props) => {
                 </select>
             </div>
         </div>
-    )};
+    )
+};
 
 export default SelectedProducts;

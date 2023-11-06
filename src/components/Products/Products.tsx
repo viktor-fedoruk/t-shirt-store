@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ProductItem from "./ProductItem/ProductItem.tsx";
 import ProductSizeFilterList from "./ProductsSorting/ProductSizeFilterList/ProductSizeFilterList.tsx";
 import SelectedProducts from "./ProductsSorting/SelectedProducts/SelectedProducts.tsx";
@@ -55,6 +55,7 @@ const Products: FC<ProductListProps> = (props) => {
                 </ul>
             </div>
         </div>
-    )};
+    )
+};
 
 export default Products;

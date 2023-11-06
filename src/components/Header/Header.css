@@ -3,8 +3,7 @@
 }
 
 .cart {
-    position: relative;
-    display: block;
+    position: fixed;
     background-color: #000;
     background-size: 50%;
     width: 60px;
@@ -14,7 +13,6 @@
 
 .cart.open {
     right: 450px;
-    position: fixed;
     background-image: url(../../../public/img/products/icon-x.png);
     background-repeat: no-repeat;
     background-size: 20px;
@@ -23,7 +21,6 @@
 }
 
 .cart.closed {
-    position: fixed;
     right: 0;
     vertical-align: middle;
     background-image: url(../../../public/img/products/cart.png);

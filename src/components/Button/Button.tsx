@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 interface ButtonProps {
     handleOnClick?: () => void,
     classNameContainer?: string,
-    classNameContent: string,
+    classNameContent?: string,
     text: string,
     buttonActiveText?: string,
 }
@@ -31,7 +31,7 @@ const Button:FC<ButtonProps> = (props) => {
 
     return (
         <div
-            className={classNameContainer}
+            className={classNameContainer || "button-container"}
             onClick={handleOnClick}
         >
             <button
@@ -41,6 +41,7 @@ const Button:FC<ButtonProps> = (props) => {
                 {buttonText}
             </button>
         </div>
-    )};
+    )
+};
 
 export default Button;
