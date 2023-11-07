@@ -1,0 +1,23 @@
+.sorting-products-by-size {
+    max-width: 15%;
+}
+
+.sorting-products-by-size-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+}
+
+.sorting-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .sorting-products-by-size {
+        display: block;
+        max-width: 100%;
+        text-align: center;
+    }
+}
