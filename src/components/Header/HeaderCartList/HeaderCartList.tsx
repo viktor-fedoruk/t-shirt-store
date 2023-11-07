@@ -52,6 +52,7 @@ const HeaderCartList:FC<HeaderCartList> = (props) => {
                             />
                         ))}
                     </ul>
+
                     <div className="header-cart-checkout">
                         <div className="header-cart-subtotal">
                             <div className="header-cart-subtotal-title">
