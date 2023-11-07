@@ -32,23 +32,19 @@ const ProductItem:FC<ProductItemProps> = (props) => {
         } else {
             const updatedCartProducts = [...cartProducts];
             const findProductByIndex = cartProducts.findIndex(productItem => productItem.id === product.id);
-            const productInCart = cartProducts[findProductByIndex];
+            const productInCart = updatedCartProducts[findProductByIndex];
 
             if (productInCart.quantity) {
                 productInCart.quantity++;
-
-                setCartProducts([
-                    ...cartProducts
-                ]);
             }
 
             if (productInCart.quantity === productInCart.installments) {
-                productInCart.price = Math.round(cartProducts[findProductByIndex].price / cartProducts[findProductByIndex].installments * 100) / 100;
+                productInCart.price = Math.round(updatedCartProducts[findProductByIndex].price / updatedCartProducts[findProductByIndex].installments * 100) / 100;
             }
 
             setCartProducts(updatedCartProducts);
-            }
         }
+    }
 
     return (
         <li className="product-item-wrapper">

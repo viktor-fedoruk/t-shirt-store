@@ -37,11 +37,11 @@ const Modal: FC<iModalProps> = (props) => {
 
     return createPortal(
         <div
-            className={`${classNameWrapper || "portal-wrapper"}`}
+            className={`portal-container ${classNameWrapper || ""}`}
         >
             <div
                 ref={modalRef}
-                className={`${classNameContent || "portal-wrapper-content"}`}
+                className={`portal-wrapper-content ${classNameContent || ""}`}
             >
                 {children}
             </div>

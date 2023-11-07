@@ -23,7 +23,7 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
         }
     }
 
-    const handleMouseEvents = (e: React.MouseEvent<HTMLDivElement>, mouseOnElement: boolean) => {
+    const handleMouseEvents = (e: React.MouseEvent<HTMLDivElement>, isMouseOnElement: boolean) => {
         const targetElement = e.target as HTMLElement;
 
         if (targetElement) {
@@ -35,7 +35,7 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
 
 
                 if (getProductById) {
-                    if (mouseOnElement) {
+                    if (isMouseOnElement) {
                         getProductById.classList.add("line-through");
                     } else {
                         getProductById.classList.remove("line-through");
@@ -74,7 +74,7 @@ const HeaderCartItem:FC<HeaderCartItemProps> = (props) => {
 
             <div className="cart-item-remove-wrapper"
                  onMouseOver={(e) => handleMouseEvents(e, true)}
-                 onMouseOut={(e) => handleMouseEvents(e, true)}
+                 onMouseOut={(e) => handleMouseEvents(e, false)}
             >
                 <button
                     className="remove-item"

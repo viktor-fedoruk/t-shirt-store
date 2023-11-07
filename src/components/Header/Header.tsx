@@ -16,8 +16,7 @@ const Header:FC<HeaderProps> = (props) => {
 
     const [isHeaderCartOpen, setIsHeaderCartOpen] = useState<boolean>(false);
     const productsQuantityInCart = cartProducts
-        .map(productQuantity => productQuantity.quantity)
-        .reduce((sum, current) => ((sum || 0) + (current || 0)), 0);
+        .reduce((sum, current) => ((sum || 0) + (current.quantity || 0)), 0);
 
     const handleToggleIsHeaderList = () => {
         setIsHeaderCartOpen(isHeaderCartOpen => !isHeaderCartOpen);

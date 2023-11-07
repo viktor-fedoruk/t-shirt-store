@@ -31,11 +31,11 @@ const Button:FC<ButtonProps> = (props) => {
 
     return (
         <div
-            className={classNameContainer || "button-container"}
+            className={`button-container ${classNameContainer || ""}`}
             onClick={handleOnClick}
         >
             <button
-                className={classNameContent}
+                className={`button-content ${classNameContent || ""}`}
                 onClick={handleChangeButtonText}
             >
                 {buttonText}
